@@ -251,6 +251,21 @@ export default function App() {
     );
   };
 
+  const handleApplyForecastBudget = (platformBudgets: Record<string, number>) => {
+    setCampaigns((prev) =>
+      prev.map((c) => {
+        const platKey = Object.keys(platformBudgets).find((k) => k.toLowerCase().includes(c.platform.toLowerCase()));
+        if (platKey && platformBudgets[platKey]) {
+          const total30d = platformBudgets[platKey];
+          const matchingCount = prev.filter((item) => item.platform === c.platform).length || 1;
+          const newDailyBudget = Math.round((total30d / 30) / matchingCount);
+          return { ...c, dailyBudget: newDailyBudget };
+        }
+        return c;
+      })
+    );
+  };
+
   const handleAddCampaign = (newCamp: AdCampaign) => {
     setCampaigns((prev) => [newCamp, ...prev]);
   };
@@ -311,6 +326,7 @@ export default function App() {
             onManualSync={handleManualSync}
             lastSyncTime={lastSyncTime}
             onOpenNewCampaign={() => setIsNewCampaignModalOpen(true)}
+            onApplyBudgetToCampaigns={handleApplyForecastBudget}
           />
         )}
 

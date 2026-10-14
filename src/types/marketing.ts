@@ -246,4 +246,45 @@ export interface SEMrushLocalOverview {
   top3PackShareOfVoice: number;
 }
 
+export interface ROIForecastPlatformBreakdown {
+  platform: string;
+  historicalSpend: number;
+  historicalRevenue: number;
+  historicalRoas: number;
+  recommendedSpend: number;
+  recommendedSharePct: number;
+  projectedRevenue: number;
+  projectedRoas: number;
+  status: 'Optimal Scale Zone' | 'Peak Efficiency' | 'Approaching Saturation' | 'Awareness Anchor';
+  rationale: string;
+}
+
+export interface ROIForecastDayPoint {
+  dayNumber: number;
+  date: string;
+  dailySpend: number;
+  dailyRevenue: number;
+  cumulativeSpend: number;
+  cumulativeRevenue: number;
+  lowerBoundRevenue: number;
+  upperBoundRevenue: number;
+  isPayday: boolean;
+  isWeekend: boolean;
+}
+
+export interface ROIForecastResult {
+  scenario: 'Conservative' | 'Balanced' | 'Aggressive';
+  targetRevenue: number;
+  requiredSpend: number;
+  historicalSpend: number;
+  spendDeltaPct: number;
+  projectedRoas: number;
+  historicalRoas: number;
+  projectedConversions: number;
+  projectedAov: number;
+  projectedNetMargin: number;
+  platforms: ROIForecastPlatformBreakdown[];
+  dailyPoints: ROIForecastDayPoint[];
+}
+
 

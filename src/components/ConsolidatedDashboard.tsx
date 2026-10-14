@@ -21,6 +21,7 @@ import {
   Percent,
   Zap,
   Calendar,
+  ArrowRight,
 } from 'lucide-react';
 import {
   ResponsiveContainer,
@@ -41,6 +42,7 @@ import {
   SyncCadence,
   AdCampaign,
 } from '../types/marketing';
+import { ROIForecaster } from './ROIForecaster';
 
 interface ConsolidatedDashboardProps {
   consolidatedPlatforms: ConsolidatedPlatformMetric[];
@@ -49,6 +51,7 @@ interface ConsolidatedDashboardProps {
   onManualSync: () => void;
   lastSyncTime: Date;
   onOpenNewCampaign: () => void;
+  onApplyBudgetToCampaigns?: (platformBudgets: Record<string, number>) => void;
 }
 
 interface CustomRevenueTooltipProps {
@@ -196,7 +199,9 @@ export const ConsolidatedDashboard: React.FC<ConsolidatedDashboardProps> = ({
   onManualSync,
   lastSyncTime,
   onOpenNewCampaign,
+  onApplyBudgetToCampaigns,
 }) => {
+  const [activeSection, setActiveSection] = useState<'all' | 'analytics' | 'forecasting'>('all');
   const [filterType, setFilterType] = useState<'All' | 'Ad Network' | 'Social Platform' | 'Hybrid'>('All');
   const [sortBy, setSortBy] = useState<'reach' | 'clicks' | 'cpc' | 'roas' | 'spend'>('roas');
   const [chartMetric, setChartMetric] = useState<'clicks_spend' | 'roas_cpc' | 'reach_engagement'>('roas_cpc');
@@ -520,14 +525,66 @@ export const ConsolidatedDashboard: React.FC<ConsolidatedDashboardProps> = ({
         </div>
       </div>
 
-      {/* The 5 Key Consolidated Metrics Specified by Prompt */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-        {/* 1. Reach */}
-        <div className="bg-slate-900/70 border border-slate-800 rounded-lg p-4 flex flex-col justify-between">
-          <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
-            <span className="font-semibold text-slate-300">Total Reach</span>
-            <Users className="w-3.5 h-3.5 text-indigo-400" />
-          </div>
+      {/* Sub-View Navigation Switcher */}
+      <div className="flex flex-wrap items-center justify-between gap-3 p-1.5 bg-slate-900/90 border border-slate-800 rounded-lg">
+        <div className="flex items-center gap-1.5 flex-wrap">
+          <button
+            onClick={() => setActiveSection('all')}
+            className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-all flex items-center gap-1.5 ${
+              activeSection === 'all'
+                ? 'bg-indigo-600 text-white shadow-sm'
+                : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
+            }`}
+          >
+            <Layers className="w-3.5 h-3.5" />
+            <span>Complete Unified View</span>
+          </button>
+
+          <button
+            onClick={() => setActiveSection('forecasting')}
+            className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-all flex items-center gap-1.5 relative ${
+              activeSection === 'forecasting'
+                ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-sm'
+                : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
+            }`}
+          >
+            <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+            <span>ROI Forecasting & 30D Spend</span>
+            <span className="px-1.5 py-0.2 rounded-full text-[9px] bg-amber-400/20 text-amber-300 border border-amber-400/40 font-bold uppercase tracking-wider">
+              New
+            </span>
+          </button>
+
+          <button
+            onClick={() => setActiveSection('analytics')}
+            className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-all flex items-center gap-1.5 ${
+              activeSection === 'analytics'
+                ? 'bg-indigo-600 text-white shadow-sm'
+                : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
+            }`}
+          >
+            <BarChart3 className="w-3.5 h-3.5" />
+            <span>Historical Telemetry & Matrix</span>
+          </button>
+        </div>
+
+        <div className="text-[11px] text-slate-400 font-mono hidden md:flex items-center gap-2 pr-2">
+          <span>Historical Run: ₱{(total30DayCumulative / 1000000).toFixed(2)}M sales</span>
+          <span className="text-slate-600">·</span>
+          <span className="text-emerald-400 font-semibold">{blendedRoas}x ROAS</span>
+        </div>
+      </div>
+
+      {(activeSection === 'all' || activeSection === 'analytics') && (
+        <>
+          {/* The 5 Key Consolidated Metrics Specified by Prompt */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+            {/* 1. Reach */}
+            <div className="bg-slate-900/70 border border-slate-800 rounded-lg p-4 flex flex-col justify-between">
+              <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
+                <span className="font-semibold text-slate-300">Total Reach</span>
+                <Users className="w-3.5 h-3.5 text-indigo-400" />
+              </div>
           <div className="text-2xl font-bold text-white font-mono tabular-nums tracking-tight">
             {(totalReach / 1000000).toFixed(2)}M
           </div>
@@ -870,12 +927,58 @@ export const ConsolidatedDashboard: React.FC<ConsolidatedDashboardProps> = ({
           </span>
         </div>
       </div>
+        </>
+      )}
+
+      {/* Interactive Callout Banner to Forecaster */}
+      {activeSection === 'analytics' && (
+        <div className="bg-gradient-to-r from-indigo-950/60 via-purple-950/40 to-slate-900 border border-indigo-800/80 rounded-lg p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-md">
+          <div className="flex items-center gap-3">
+            <div className="p-2.5 rounded-lg bg-indigo-600/20 border border-indigo-500/30 text-indigo-400 shrink-0">
+              <Sparkles className="w-5 h-5 text-amber-300" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <h4 className="text-sm font-bold text-white">Project Next 30 Days Ad Spend Requirements</h4>
+                <span className="px-2 py-0.2 rounded text-[10px] bg-amber-500/20 text-amber-300 border border-amber-500/30 font-semibold font-mono">
+                  Trend Model Ready
+                </span>
+              </div>
+              <p className="text-xs text-slate-300 mt-0.5">
+                Simulate required ad spend for Google Ads, Meta Ads, TikTok, and YouTube to hit ₱4.8M+ target revenue based on past 30-day ROAS.
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={() => setActiveSection('forecasting')}
+            className="px-4 py-2 rounded-lg text-xs font-semibold bg-indigo-600 hover:bg-indigo-500 text-white transition-all whitespace-nowrap self-start sm:self-auto flex items-center gap-1.5 shadow-sm"
+          >
+            <span>Open ROI Forecaster</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      )}
+
+      {/* 30-Day ROI Forecasting & Ad Spend Requirements Feature */}
+      {(activeSection === 'all' || activeSection === 'forecasting') && (
+        <div id="roi-forecasting-section">
+          <ROIForecaster
+            campaigns={campaigns}
+            consolidatedPlatforms={consolidatedPlatforms}
+            historical30DayRevenue={total30DayCumulative}
+            historical30DaySpend={paidSpend}
+            onApplyBudgetToCampaigns={onApplyBudgetToCampaigns}
+          />
+        </div>
+      )}
 
       {/* Hourly Performance Timeline & 24h Revenue Growth Trend Analysis */}
-      <div className="bg-slate-900/60 border border-slate-800 rounded-lg p-5">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-4">
-          <div>
-            <div className="flex items-center gap-2">
+      {(activeSection === 'all' || activeSection === 'analytics') && (
+        <>
+          <div className="bg-slate-900/60 border border-slate-800 rounded-lg p-5">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-4">
+              <div>
+                <div className="flex items-center gap-2">
               <TrendingUp className="w-4 h-4 text-emerald-400" />
               <h3 className="text-sm font-semibold text-white">24-Hour Hourly Revenue Growth & Trend Trajectory</h3>
               <span className="text-[10px] px-2 py-0.5 rounded bg-indigo-950/80 border border-indigo-800 text-indigo-300 font-mono">
@@ -1379,6 +1482,8 @@ export const ConsolidatedDashboard: React.FC<ConsolidatedDashboardProps> = ({
           </table>
         </div>
       </div>
+        </>
+      )}
     </div>
   );
 };
