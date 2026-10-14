@@ -134,6 +134,8 @@ export interface GoogleBusinessInsight {
   }>;
   reviews: Array<{
     id: string;
+    branchId: string;
+    branchName: string;
     author: string;
     rating: number;
     date: string;

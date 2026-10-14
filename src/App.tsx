@@ -84,18 +84,24 @@ export default function App() {
         'Rafael De Leon (Makati)',
         'Katrina Santos (BGC Taguig)',
         'Atty. Victor Mendoza (Ortigas)',
-        'Mark Angelo Rivera (QC)',
-        'Dr. Lorenzo Tan (Cebu City)',
+        'Mark Angelo Rivera (QC North)',
+        'Capt. Roberto M. (Cebu SRP)',
         'Beatrice Villanueva (Alabang)',
-        'Gabriel Cruz (San Juan Greenhills)',
+        'Wilson Lim (Binondo)',
+        'Paolo Rivera (Cubao)',
       ];
       const sampleLocations = [
-        'Makati City, Metro Manila',
-        'Bonifacio Global City, Taguig',
-        'Ortigas, Pasig City',
-        'Quezon City, Metro Manila',
-        'Cebu City, Central Visayas',
-        'Alabang, Muntinlupa',
+        'Glorietta 4 Flagship, Makati',
+        'Mitsukoshi BGC, Taguig',
+        'SM Megamall, Mandaluyong',
+        'SM North EDSA, Quezon City',
+        'SM Seaside City Cebu',
+        'Festival Mall, Alabang',
+        'Lucky Chinatown, Binondo',
+        'Gateway Mall 2, Cubao',
+        'Ayala Fairview Terraces, QC',
+        'EVIA Lifestyle Center, Las Piñas',
+        'SM City Cebu Northwing',
       ];
       const sampleTypes: ConversionEvent['type'][] = [
         'Strategy Call Booked', // Boutique VIP Consultation
@@ -110,10 +116,16 @@ export default function App() {
         'Google Local Search',
       ];
       const touchpointPool = [
-        ['Google PMax Makati', 'Seiko Glorietta 4 Page', 'Boutique VIP Viewing Booked'],
-        ['TikTok UGC Watch Reel', 'Meta IG Story Retargeting', 'Direct Boutique Pickup'],
-        ['Google Maps Megamall', 'Boutique Store Inventory', 'Online Reserve Confirmed'],
-        ['Facebook Prospex Diver Ad', 'Seiko Official Store PH', 'Official Authorized Checkout'],
+        ['Google PMax Makati', 'Seiko Boutique Glorietta 4', 'VIP Viewing Appointment'],
+        ['TikTok Watch Reel', 'Seiko Boutique Mitsukoshi BGC', 'Store Pickup Confirmed'],
+        ['Google Maps Megamall', 'Seiko Boutique SM Megamall', 'In-Store Walk-In & Purchase'],
+        ['Google Search "Seiko 5"', 'Seiko Boutique SM North EDSA', 'Official Boutique Checkout'],
+        ['Facebook Prospex Diver Ad', 'Seiko Boutique Festival Mall', 'Direct Boutique Purchase'],
+        ['Google Local 3-Pack Cebu', 'Seiko Boutique SM Seaside Cebu', 'Store Reserve Confirmed'],
+        ['Google Maps Cubao', 'Seiko Boutique Gateway Mall 2', 'Boutique Walk-in & Sizing'],
+        ['Meta IG Story Binondo', 'Seiko Boutique Lucky Chinatown', 'Anniversary Gift Checkout'],
+        ['Google Maps Fairview', 'Seiko Boutique Ayala Fairview Terraces', 'Counter Pickup Confirmed'],
+        ['Google Local Search Daang Hari', 'Seiko Boutique EVIA Lifestyle Center', 'Store Walk-In'],
       ];
 
       const watchValues = [18500, 24900, 28900, 48500, 72000, 115000, 385000];

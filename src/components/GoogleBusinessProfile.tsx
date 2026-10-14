@@ -39,6 +39,7 @@ export const GoogleBusinessProfile: React.FC<GoogleBusinessProfileProps> = ({
   const [regionFilter, setRegionFilter] = useState<'All' | 'Metro Manila' | 'Cebu'>('All');
   const [statusFilter, setStatusFilter] = useState<'All' | 'Above Benchmark' | 'Below Benchmark'>('All');
   const [searchFilter, setSearchFilter] = useState<string>('');
+  const [reviewBranchFilter, setReviewBranchFilter] = useState<string>('All');
   const [expandedBranchId, setExpandedBranchId] = useState<string | null>('branch-mitsukoshi');
   const [activeView, setActiveView] = useState<'table' | 'intent' | 'reviews'>('table');
   const [respondingReviewId, setRespondingReviewId] = useState<string | null>(null);
@@ -65,9 +66,13 @@ export const GoogleBusinessProfile: React.FC<GoogleBusinessProfileProps> = ({
     });
   }, [branchPerformance, regionFilter, statusFilter, searchFilter]);
 
-  const filteredReviews = gbpData.reviews.filter((r) => {
-    return sentimentFilter === 'All' || r.sentiment === sentimentFilter;
-  });
+  const filteredReviews = useMemo(() => {
+    return gbpData.reviews.filter((r) => {
+      const matchesSentiment = sentimentFilter === 'All' || r.sentiment === sentimentFilter;
+      const matchesBranch = reviewBranchFilter === 'All' || r.branchId === reviewBranchFilter;
+      return matchesSentiment && matchesBranch;
+    });
+  }, [gbpData.reviews, sentimentFilter, reviewBranchFilter]);
 
   const handleStartReply = (id: string, defaultName: string) => {
     setRespondingReviewId(id);
@@ -508,9 +513,29 @@ export const GoogleBusinessProfile: React.FC<GoogleBusinessProfileProps> = ({
       {/* VIEW 3: Reviews & Reputation Management */}
       {activeView === 'reviews' && (
         <div className="space-y-4">
-          <div className="flex items-center justify-between bg-slate-900/60 p-3 rounded-lg border border-slate-800">
-            <span className="text-xs font-semibold text-white">Filter Customer Feedback:</span>
-            <div className="flex items-center gap-1.5 text-xs">
+          {/* Dual Filter Controls: Branch Filter and Sentiment Filter */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-900/70 p-3.5 rounded-xl border border-slate-800">
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-semibold text-white whitespace-nowrap">Select Boutique:</span>
+              <select
+                value={reviewBranchFilter}
+                onChange={(e) => setReviewBranchFilter(e.target.value)}
+                className="bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1 text-xs text-white focus:outline-none focus:border-indigo-500 font-medium"
+              >
+                <option value="All">All Boutiques ({gbpData.reviews.length} reviews)</option>
+                {branchPerformance.map((b) => {
+                  const count = gbpData.reviews.filter((r) => r.branchId === b.id).length;
+                  return (
+                    <option key={b.id} value={b.id}>
+                      {b.branchName} ({count > 0 ? `${count} reviews · ${b.averageStarRating > 0 ? `${b.averageStarRating}★` : 'unrated'}` : 'no reviews'})
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+
+            <div className="flex items-center gap-1.5 text-xs self-start sm:self-auto">
+              <span className="text-slate-400 text-[11px] mr-1">Sentiment:</span>
               {(['All', 'Positive', 'Neutral', 'Critical'] as const).map((sent) => (
                 <button
                   key={sent}
@@ -527,71 +552,118 @@ export const GoogleBusinessProfile: React.FC<GoogleBusinessProfileProps> = ({
             </div>
           </div>
 
-          <div className="space-y-3">
-            {filteredReviews.map((rev) => (
-              <div key={rev.id} className="bg-slate-900/70 border border-slate-800 rounded-lg p-4 space-y-2 text-xs">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="font-bold text-white">{rev.author}</span>
-                    <span className="text-slate-500">·</span>
-                    <span className="text-slate-400">{rev.date}</span>
-                  </div>
-                  <div className="flex text-amber-400">
-                    {[...Array(rev.rating)].map((_, i) => (
-                      <Star key={i} className="w-3 h-3 fill-current" />
-                    ))}
-                  </div>
+          {/* Empty State for branches with no reviews */}
+          {filteredReviews.length === 0 ? (
+            <div className="p-8 rounded-xl bg-slate-900/50 border border-slate-800 text-center space-y-3">
+              <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center mx-auto text-slate-400">
+                <MessageSquare className="w-5 h-5 text-slate-500" />
+              </div>
+              <div>
+                <h4 className="text-sm font-bold text-white">No Reviews Logged Yet</h4>
+                <p className="text-xs text-slate-400 max-w-md mx-auto mt-1">
+                  {reviewBranchFilter !== 'All'
+                    ? `This boutique has 0 customer reviews logged on its Google Business Profile.`
+                    : `No reviews match the selected filter criteria.`}
+                </p>
+              </div>
+              {reviewBranchFilter !== 'All' && (
+                <div className="inline-block bg-slate-950 border border-slate-800 rounded-lg p-3 text-left max-w-md mx-auto text-xs space-y-1">
+                  <span className="text-amber-400 font-semibold block">Strategic Action Plan:</span>
+                  <span className="text-slate-300">
+                    Deploy counter QR review cards and incentivize in-store staff to request verified customer ratings at checkout.
+                  </span>
                 </div>
+              )}
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {filteredReviews.map((rev) => (
+                <div key={rev.id} className="bg-slate-900/70 border border-slate-800 rounded-xl p-4 space-y-2.5 text-xs transition-colors hover:border-slate-700">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="font-bold text-white">{rev.author}</span>
+                      <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-800 text-amber-300 border border-slate-700">
+                        {rev.branchName}
+                      </span>
+                      <span className="text-slate-500">·</span>
+                      <span className="text-slate-400 text-[11px]">{rev.date}</span>
+                    </div>
 
-                <p className="text-slate-300 leading-relaxed italic">"{rev.text}"</p>
-
-                {rev.responded && rev.replyText && (
-                  <div className="bg-slate-950/80 p-2.5 rounded border border-slate-800 text-[11px] space-y-1">
-                    <span className="text-emerald-400 font-bold flex items-center gap-1">
-                      <CheckCircle2 className="w-3 h-3" />
-                      <span>Official Seiko Philippines Response:</span>
-                    </span>
-                    <p className="text-slate-400">{rev.replyText}</p>
-                  </div>
-                )}
-
-                {!rev.responded && respondingReviewId !== rev.id && (
-                  <button
-                    onClick={() => handleStartReply(rev.id, rev.author)}
-                    className="text-indigo-400 hover:text-indigo-300 font-semibold text-[11px] flex items-center gap-1 pt-1"
-                  >
-                    <Send className="w-3 h-3" />
-                    <span>Reply as Seiko Philippines</span>
-                  </button>
-                )}
-
-                {respondingReviewId === rev.id && (
-                  <div className="space-y-2 pt-2 border-t border-slate-800">
-                    <textarea
-                      value={responseText}
-                      onChange={(e) => setResponseText(e.target.value)}
-                      rows={3}
-                      className="w-full bg-slate-950 border border-slate-700 rounded p-2 text-xs text-white focus:outline-none focus:border-indigo-500"
-                    />
-                    <div className="flex items-center gap-2 justify-end">
-                      <button
-                        onClick={() => setRespondingReviewId(null)}
-                        className="px-2.5 py-1 text-slate-400 hover:text-white"
-                      >
-                        Cancel
-                      </button>
-                      <button
-                        onClick={() => handleSubmitReply(rev.id)}
-                        className="px-3 py-1 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded"
-                      >
-                        Send Reply
-                      </button>
+                    <div className="flex items-center gap-2">
+                      <div className="flex text-amber-400">
+                        {[...Array(5)].map((_, i) => (
+                          <Star
+                            key={i}
+                            className={`w-3.5 h-3.5 ${
+                              i < rev.rating ? 'fill-current text-amber-400' : 'text-slate-700'
+                            }`}
+                          />
+                        ))}
+                      </div>
+                      <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${
+                        rev.sentiment === 'Positive'
+                          ? 'bg-emerald-950 text-emerald-400'
+                          : rev.sentiment === 'Critical'
+                          ? 'bg-rose-950 text-rose-400'
+                          : 'bg-slate-800 text-slate-300'
+                      }`}>
+                        {rev.sentiment}
+                      </span>
                     </div>
                   </div>
-                )}
-              </div>
-            ))}
-          </div>
+
+                  <p className="text-slate-300 leading-relaxed italic bg-slate-950/40 p-3 rounded-lg border border-slate-850">
+                    "{rev.text}"
+                  </p>
+
+                  {rev.responded && rev.replyText && (
+                    <div className="bg-slate-950/80 p-2.5 rounded-lg border border-slate-800 text-[11px] space-y-1">
+                      <span className="text-emerald-400 font-bold flex items-center gap-1">
+                        <CheckCircle2 className="w-3 h-3" />
+                        <span>Official Seiko Philippines Response:</span>
+                      </span>
+                      <p className="text-slate-400">{rev.replyText}</p>
+                    </div>
+                  )}
+
+                  {!rev.responded && respondingReviewId !== rev.id && (
+                    <button
+                      onClick={() => handleStartReply(rev.id, rev.author)}
+                      className="text-indigo-400 hover:text-indigo-300 font-semibold text-[11px] flex items-center gap-1 pt-1"
+                    >
+                      <Send className="w-3 h-3" />
+                      <span>Reply as Official Seiko Philippines</span>
+                    </button>
+                  )}
+
+                  {respondingReviewId === rev.id && (
+                    <div className="space-y-2 pt-2 border-t border-slate-800">
+                      <textarea
+                        value={responseText}
+                        onChange={(e) => setResponseText(e.target.value)}
+                        rows={3}
+                        className="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-indigo-500"
+                      />
+                      <div className="flex items-center gap-2 justify-end">
+                        <button
+                          onClick={() => setRespondingReviewId(null)}
+                          className="px-2.5 py-1 text-slate-400 hover:text-white"
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          onClick={() => handleSubmitReply(rev.id)}
+                          className="px-3 py-1 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded"
+                        >
+                          Send Official Reply
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>

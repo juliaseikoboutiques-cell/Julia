@@ -494,43 +494,494 @@ export const initialGoogleBusiness: GoogleBusinessInsight = {
     { query: 'seiko boutique sm megamall', impressions: 6900, changePct: 12.1 }
   ],
   reviews: [
+    // SM Megamall (11 reviews - 2.9★ critical reputation drag, phone unresponsiveness & pre-order delays)
     {
-      id: 'rev-1',
-      author: 'Carlo Dizon (Verified Buyer, Makati)',
-      rating: 5,
-      date: 'Yesterday',
-      text: 'Purchased my first Seiko Prospex Speedtimer at the Glorietta 4 boutique. The staff were exceptionally knowledgeable about the V192 solar chronograph caliber. Came with the full official Philippine warranty card and boutique box. 10/10 customer experience!',
-      sentiment: 'Positive',
+      id: 'rev-mega-1',
+      branchId: 'branch-sm-megamall',
+      branchName: 'SM Megamall',
+      author: 'Richard Tan (Mandaluyong)',
+      rating: 2,
+      date: '4 days ago',
+      text: 'Pre-ordered a Prospex Speedtimer Panda and was promised a phone update within 2 weeks. A month passed with zero notice. When I called the boutique landline, it rang endlessly. Staff need serious follow-up training.',
+      sentiment: 'Critical',
       responded: true,
-      replyText: 'Thank you Carlo! Welcome to the Seiko family. May your Prospex Speedtimer serve you well on every journey.'
+      replyText: 'Hi Richard, we sincerely apologize for the lack of communication on your pre-order. Our store manager has been notified and will call you directly with your allocation details.'
     },
     {
-      id: 'rev-2',
-      author: 'Mariel Lopez (Architect, BGC)',
+      id: 'rev-mega-2',
+      branchId: 'branch-sm-megamall',
+      branchName: 'SM Megamall',
+      author: 'Neil B. (Pasig Greenhills)',
+      rating: 2,
+      date: '1 week ago',
+      text: 'Staff customer engagement needs improvement. The sales associate seemed disinterested when I asked questions about the 6R35 movement power reserve on the Alpinist.',
+      sentiment: 'Critical',
+      responded: false
+    },
+    {
+      id: 'rev-mega-3',
+      branchId: 'branch-sm-megamall',
+      branchName: 'SM Megamall',
+      author: 'Gerard F. (Ortigas Center)',
+      rating: 2,
+      date: '2 weeks ago',
+      text: 'Phoned multiple times regarding stock availability of the Seiko 5 Sports GMT, line was either busy or unanswered.',
+      sentiment: 'Critical',
+      responded: false
+    },
+    {
+      id: 'rev-mega-4',
+      branchId: 'branch-sm-megamall',
+      branchName: 'SM Megamall',
+      author: 'Bryan V. (Shaw Blvd)',
+      rating: 1,
+      date: '3 weeks ago',
+      text: 'Poor after-sales communication regarding my watch warranty repair status. Had to physically visit the store twice just to get an update.',
+      sentiment: 'Critical',
+      responded: false
+    },
+    {
+      id: 'rev-mega-5',
+      branchId: 'branch-sm-megamall',
+      branchName: 'SM Megamall',
+      author: 'Kristine D. (Mandaluyong)',
+      rating: 1,
+      date: '1 month ago',
+      text: 'Disappointing experience with staff attitude when asking to try on two different watches for sizing.',
+      sentiment: 'Critical',
+      responded: false
+    },
+    {
+      id: 'rev-mega-6',
+      branchId: 'branch-sm-megamall',
+      branchName: 'SM Megamall',
+      author: 'Enrico M. (Wack-Wack)',
+      rating: 3,
+      date: '1 month ago',
+      text: 'Boutique has great watches but staff look overwhelmed during weekends. Took 20 minutes just to get someone to open the display case.',
+      sentiment: 'Neutral',
+      responded: false
+    },
+    {
+      id: 'rev-mega-7',
+      branchId: 'branch-sm-megamall',
+      branchName: 'SM Megamall',
+      author: 'Alvin G. (Ortigas)',
+      rating: 5,
+      date: '1 month ago',
+      text: 'Got my Seiko 5 Sports GMT here. Beautiful orange dial! Staff on Tuesday morning knew all the specs and handled the timepiece with gloves.',
+      sentiment: 'Positive',
+      responded: true,
+      replyText: 'Thank you Alvin! We are thrilled you love your new Seiko 5 Sports GMT.'
+    },
+    {
+      id: 'rev-mega-8',
+      branchId: 'branch-sm-megamall',
+      branchName: 'SM Megamall',
+      author: 'Marco S. (Mandaluyong)',
+      rating: 5,
+      date: '2 months ago',
+      text: 'Brought my older Seiko automatic for regulation and service check. The technician was polite and knowledgeable.',
+      sentiment: 'Positive',
+      responded: true
+    },
+    {
+      id: 'rev-mega-9',
+      branchId: 'branch-sm-megamall',
+      branchName: 'SM Megamall',
+      author: 'Cesar J. (Pasig)',
+      rating: 4,
+      date: '2 months ago',
+      text: 'Extensive collection on display on the 2nd floor Building B. You can inspect almost any model in the catalog.',
+      sentiment: 'Positive',
+      responded: false
+    },
+    {
+      id: 'rev-mega-10',
+      branchId: 'branch-sm-megamall',
+      branchName: 'SM Megamall',
+      author: 'Danielle P. (San Juan)',
+      rating: 4,
+      date: '2 months ago',
+      text: 'Good purchase experience for my boyfriend birthday watch. Fast paperwork and official warranty.',
+      sentiment: 'Positive',
+      responded: false
+    },
+    {
+      id: 'rev-mega-11',
+      branchId: 'branch-sm-megamall',
+      branchName: 'SM Megamall',
+      author: 'Marvin C. (Pioneer)',
+      rating: 2,
+      date: '3 months ago',
+      text: 'Long wait time at the service counter just to remove two links. Staff were preoccupied with stock inventory.',
+      sentiment: 'Critical',
+      responded: false
+    },
+
+    // Festival Mall Alabang (7 reviews - 4.5★, 83.3% positive)
+    {
+      id: 'rev-fest-1',
+      branchId: 'branch-festival-mall',
+      branchName: 'Festival Mall',
+      author: 'Ramon V. (Filinvest City)',
       rating: 5,
       date: '3 days ago',
-      text: 'Visited for the Grand Seiko private consultation. They had the Evolution 9 White Birch in stock. Impeccable Zaratsu polishing and warm hospitality from the Seiko Philippines boutique associates.',
+      text: 'Top-notch customer service! The store manager assisted me patiently in choosing between the Seiko 5 Field watch and the Turtle diver. 10/10 service in the South.',
       sentiment: 'Positive',
       responded: true,
-      replyText: 'Maraming salamat Mariel! It was our pleasure hosting you for the Grand Seiko viewing at Glorietta 4.'
+      replyText: 'Thank you Ramon! Our Festival Mall team always strives to provide attentive, personalized horological guidance.'
     },
     {
-      id: 'rev-3',
-      author: 'Jerome Bautista (Philippine Watch Club)',
+      id: 'rev-fest-2',
+      branchId: 'branch-festival-mall',
+      branchName: 'Festival Mall',
+      author: 'Dr. Kenneth B. (Muntinlupa)',
       rating: 5,
       date: '1 week ago',
-      text: 'The best place to buy authentic Seiko in Metro Manila. Had my Presage Cocktail Time bracelet adjusted on the spot in under 5 minutes at the service counter.',
+      text: 'Purchased my Presage Cocktail Time Blue Moon here. Very courteous staff and provided official Seiko travel pouch freebies with purchase.',
       sentiment: 'Positive',
-      responded: true,
-      replyText: 'Thank you Jerome! We always take pride in supporting our local watch community and PWC members.'
+      responded: true
     },
     {
-      id: 'rev-4',
-      author: 'Anthony Go (Quezon City)',
+      id: 'rev-fest-3',
+      branchId: 'branch-festival-mall',
+      branchName: 'Festival Mall',
+      author: 'Aileen Tan (Ayala Alabang)',
+      rating: 5,
+      date: '2 weeks ago',
+      text: 'Clean, well-lit boutique. Great after-sales service when I brought my watch back for a quick link adjustment.',
+      sentiment: 'Positive',
+      responded: false
+    },
+    {
+      id: 'rev-fest-4',
+      branchId: 'branch-festival-mall',
+      branchName: 'Festival Mall',
+      author: 'Mark L. (San Pedro, Laguna)',
+      rating: 5,
+      date: '3 weeks ago',
+      text: 'Always authentic, no worries about fake or grey market watches. Official Philippine distributor warranty stamped on the spot.',
+      sentiment: 'Positive',
+      responded: false
+    },
+    {
+      id: 'rev-fest-5',
+      branchId: 'branch-festival-mall',
+      branchName: 'Festival Mall',
+      author: 'Gabriel C. (BF Homes)',
+      rating: 4,
+      date: '1 month ago',
+      text: 'Good collection of automatic watches. Would love to see more Seiko Prospex limited edition releases in this branch.',
+      sentiment: 'Positive',
+      responded: false
+    },
+    {
+      id: 'rev-fest-6',
+      branchId: 'branch-festival-mall',
+      branchName: 'Festival Mall',
+      author: 'Jocelyn D. (South Park Alabang)',
+      rating: 4,
+      date: '1 month ago',
+      text: 'Helpful personnel. Answered all technical questions about water resistance and solar movements.',
+      sentiment: 'Positive',
+      responded: false
+    },
+    {
+      id: 'rev-fest-7',
+      branchId: 'branch-festival-mall',
+      branchName: 'Festival Mall',
+      author: 'Victor N. (Muntinlupa)',
+      rating: 2,
+      date: '2 months ago',
+      text: 'Stocks of replacement rubber diver straps were low. Had to be referred to Makati for parts.',
+      sentiment: 'Critical',
+      responded: false
+    },
+
+    // Glorietta (3 reviews - 3.5★, 50% positive)
+    {
+      id: 'rev-glor-1',
+      branchId: 'branch-glorietta',
+      branchName: 'Glorietta',
+      author: 'Carlo Dizon (Makati CBD)',
+      rating: 5,
+      date: 'Yesterday',
+      text: 'Purchased my Prospex Speedtimer solar chronograph here. The boutique associates are knowledgeable about caliber functions and official Seiko warranty.',
+      sentiment: 'Positive',
+      responded: true,
+      replyText: 'Thank you Carlo! Welcome to the Seiko family.'
+    },
+    {
+      id: 'rev-glor-2',
+      branchId: 'branch-glorietta',
+      branchName: 'Glorietta',
+      author: 'Mariel Lopez (Architect, Makati)',
+      rating: 4,
+      date: '5 days ago',
+      text: 'Visited for the Grand Seiko private consultation. Collection display is premier, but store can get crowded on Saturday afternoons.',
+      sentiment: 'Positive',
+      responded: true
+    },
+    {
+      id: 'rev-glor-3',
+      branchId: 'branch-glorietta',
+      branchName: 'Glorietta',
+      author: 'Dennis A. (Legaspi Village)',
+      rating: 2,
+      date: '2 weeks ago',
+      text: 'Customer service needs improvement during peak hours. Was waiting by the King Seiko showcase for 15 minutes before anyone acknowledged me.',
+      sentiment: 'Critical',
+      responded: false
+    },
+
+    // EVIA (2 reviews - 3.25★, 50% positive)
+    {
+      id: 'rev-evia-1',
+      branchId: 'branch-evia',
+      branchName: 'EVIA',
+      author: 'Eduardo Gomez (Almanza Dos)',
+      rating: 5,
+      date: '1 week ago',
+      text: 'Convenient South boutique setup inside EVIA. Easy parking and peaceful store atmosphere to inspect Prospex divers.',
+      sentiment: 'Positive',
+      responded: true,
+      replyText: 'Salamat Eduardo! Enjoy your new timepiece.'
+    },
+    {
+      id: 'rev-evia-2',
+      branchId: 'branch-evia',
+      branchName: 'EVIA',
+      author: 'Patricia M. (Daang Hari)',
+      rating: 2,
+      date: '3 weeks ago',
+      text: 'Direct phone number listed on Google Maps doesn’t ring through. Had to drive in person just to ask if the Presage Cocktail Time was available.',
+      sentiment: 'Critical',
+      responded: false
+    },
+
+    // Gateway Mall (2 reviews - 3.5★, 50% positive)
+    {
+      id: 'rev-gate-1',
+      branchId: 'branch-gateway-mall2',
+      branchName: 'Gateway Mall2',
+      author: 'Paolo R. (New Manila)',
+      rating: 5,
+      date: '6 days ago',
+      text: 'Located in the new Gateway Mall 2 expansion wing. Great boutique atmosphere, clean glass displays, and friendly personnel.',
+      sentiment: 'Positive',
+      responded: true
+    },
+    {
+      id: 'rev-gate-2',
+      branchId: 'branch-gateway-mall2',
+      branchName: 'Gateway Mall2',
+      author: 'Arnold M. (Cubao, QC)',
+      rating: 2,
+      date: '3 weeks ago',
+      text: 'Wayfinding is confusing because mall directory pin was on the older wing. Update your exact floor level and entrance directions on Maps.',
+      sentiment: 'Critical',
+      responded: false
+    },
+
+    // Lucky Chinatown (4 reviews - 3.25★, 50% positive)
+    {
+      id: 'rev-lucky-1',
+      branchId: 'branch-lucky-china-town',
+      branchName: 'Lucky China Town',
+      author: 'Wilson Lim (Binondo, Manila)',
+      rating: 5,
+      date: '4 days ago',
+      text: 'Convenient Seiko boutique right in Chinatown! Bought a gold-tone Seiko 5 as an anniversary gift. Staff offered gift wrapping.',
+      sentiment: 'Positive',
+      responded: true
+    },
+    {
+      id: 'rev-lucky-2',
+      branchId: 'branch-lucky-china-town',
+      branchName: 'Lucky China Town',
+      author: 'Jefferson K. (Divisoria)',
       rating: 4,
       date: '2 weeks ago',
-      text: 'Great collection of Seiko 5 Sports and Prospex Divers. Boutique was very busy on Saturday afternoon so had to wait 10 minutes for an available associate, but service was attentive once assisted.',
+      text: 'Good customer assistance. Fast battery replacement for my quartz chronograph with water resistance pressure check.',
       sentiment: 'Positive',
+      responded: false
+    },
+    {
+      id: 'rev-lucky-3',
+      branchId: 'branch-lucky-china-town',
+      branchName: 'Lucky China Town',
+      author: 'Stephanie C. (Manila)',
+      rating: 2,
+      date: '3 weeks ago',
+      text: 'Smaller boutique so popular automatic watches sell out quickly. Cashier processing was slow.',
+      sentiment: 'Critical',
+      responded: false
+    },
+    {
+      id: 'rev-lucky-4',
+      branchId: 'branch-lucky-china-town',
+      branchName: 'Lucky China Town',
+      author: 'Arthur T. (Santa Cruz, Manila)',
+      rating: 2,
+      date: '1 month ago',
+      text: 'Sales staff seemed a bit rushed and did not explain warranty coverage in detail.',
+      sentiment: 'Critical',
+      responded: false
+    },
+
+    // Ayala Fairview Terraces (2 reviews - 3.5★, 50% positive)
+    {
+      id: 'rev-fair-1',
+      branchId: 'branch-fairview',
+      branchName: 'Ayala Fairview Terraces',
+      author: 'Christian P. (Fairview, QC)',
+      rating: 5,
+      date: '1 week ago',
+      text: 'Got my Seiko 5 Sports SRPD here. Staff was accommodating and sized the stainless steel bracelet immediately. Happy with the official Philippine warranty card.',
+      sentiment: 'Positive',
+      responded: true
+    },
+    {
+      id: 'rev-fair-2',
+      branchId: 'branch-fairview',
+      branchName: 'Ayala Fairview Terraces',
+      author: 'Rhea S. (Novaliches)',
+      rating: 2,
+      date: '1 month ago',
+      text: 'Limited display for women Presage and Lukia models. Associate said they had to order from the Makati main warehouse.',
+      sentiment: 'Critical',
+      responded: false
+    },
+
+    // SM City Cebu (3 reviews - 3.5★, 50% positive)
+    {
+      id: 'rev-smcebu-1',
+      branchId: 'branch-sm-cebu',
+      branchName: 'SM Cebu',
+      author: 'Michael O. (Cebu City)',
+      rating: 5,
+      date: '5 days ago',
+      text: 'Great to have an official Seiko boutique in SM Cebu Northwing! Sized my watch for free and verified authenticity.',
+      sentiment: 'Positive',
+      responded: true
+    },
+    {
+      id: 'rev-smcebu-2',
+      branchId: 'branch-sm-cebu',
+      branchName: 'SM Cebu',
+      author: 'Atty. Francis D. (Mandaue)',
+      rating: 4,
+      date: '2 weeks ago',
+      text: 'Good display of Seiko Prospex Diver line (Sumo and Samurai). Accommodating staff.',
+      sentiment: 'Positive',
+      responded: false
+    },
+    {
+      id: 'rev-smcebu-3',
+      branchId: 'branch-sm-cebu',
+      branchName: 'SM Cebu',
+      author: 'Bernadette L. (Talisay City)',
+      rating: 2,
+      date: '1 month ago',
+      text: 'Inquired about the limited edition Philippine release, but staff could not confirm when shipment will arrive in Cebu.',
+      sentiment: 'Critical',
+      responded: false
+    },
+
+    // SM Seaside Cebu (1 review - 5.0★, 100% positive)
+    {
+      id: 'rev-seaside-1',
+      branchId: 'branch-seaside-cebu',
+      branchName: 'Seaside Cebu',
+      author: 'Capt. Roberto M. (SRP, Cebu)',
+      rating: 5,
+      date: '2 weeks ago',
+      text: 'World-class customer service! The boutique team in SM Seaside is the best in the Visayas. Very polite, highly professional, and knows horology inside out. Highly recommended!',
+      sentiment: 'Positive',
+      responded: true,
+      replyText: 'Daghang salamat Capt. Roberto! We are honored to be your trusted horological destination in Cebu.'
+    },
+
+    // SM North (4 reviews - 4.2★, 79.2% positive)
+    {
+      id: 'rev-smnorth-1',
+      branchId: 'branch-sm-north',
+      branchName: 'SM North',
+      author: 'Jonathan Reyes (Quezon City)',
+      rating: 5,
+      date: '3 days ago',
+      text: 'Massive branch with the widest selection of Seiko 5 Sports and Prospex. Very busy on weekends, but the staff managed the queue well.',
+      sentiment: 'Positive',
+      responded: true
+    },
+    {
+      id: 'rev-smnorth-2',
+      branchId: 'branch-sm-north',
+      branchName: 'SM North',
+      author: 'Dexter P. (West Triangle)',
+      rating: 5,
+      date: '1 week ago',
+      text: 'Bought my daily beater Seiko diver here. Fast checkout, clear warranty explanation, and friendly demeanor.',
+      sentiment: 'Positive',
+      responded: true
+    },
+    {
+      id: 'rev-smnorth-3',
+      branchId: 'branch-sm-north',
+      branchName: 'SM North',
+      author: 'Leandro M. (North Avenue)',
+      rating: 4,
+      date: '2 weeks ago',
+      text: 'Good stock of popular models. You do not have to wait for delivery from Makati. Recommended for North Manila collectors.',
+      sentiment: 'Positive',
+      responded: false
+    },
+    {
+      id: 'rev-smnorth-4',
+      branchId: 'branch-sm-north',
+      branchName: 'SM North',
+      author: 'Sarah T. (Project 6, QC)',
+      rating: 3,
+      date: '3 weeks ago',
+      text: 'Crowded store, had to wait a while for assistance. But the sales assistant was patient once it was our turn.',
+      sentiment: 'Neutral',
+      responded: false
+    },
+
+    // Mitsukoshi BGC (3 reviews - 4.0★, 75% positive)
+    {
+      id: 'rev-mitsu-1',
+      branchId: 'branch-mitsukoshi',
+      branchName: 'Mitsukoshi BGC',
+      author: 'Kenji Takahashi (BGC, Taguig)',
+      rating: 5,
+      date: '4 days ago',
+      text: 'Authentic Japanese boutique experience in Mitsukoshi. Beautiful minimalist store design and the staff understand the craftsmanship behind Grand Seiko and King Seiko.',
+      sentiment: 'Positive',
+      responded: true,
+      replyText: 'Arigato gozaimasu Kenji-san! It is our honor to share Japanese horological excellence with you in BGC.'
+    },
+    {
+      id: 'rev-mitsu-2',
+      branchId: 'branch-mitsukoshi',
+      branchName: 'Mitsukoshi BGC',
+      author: 'Atty. Melissa Ramos (Bonifacio High Street)',
+      rating: 5,
+      date: '1 week ago',
+      text: 'Booked an online viewing appointment and was treated with top-tier hospitality. Pristine presentation and zero pressure.',
+      sentiment: 'Positive',
+      responded: true
+    },
+    {
+      id: 'rev-mitsu-3',
+      branchId: 'branch-mitsukoshi',
+      branchName: 'Mitsukoshi BGC',
+      author: 'Dave E. (Taguig)',
+      rating: 2,
+      date: '3 weeks ago',
+      text: 'Store can be difficult to locate if it is your first time in Mitsukoshi BGC. Need better directional signs from basement parking.',
+      sentiment: 'Critical',
       responded: false
     }
   ]
@@ -1222,6 +1673,28 @@ export const initialBranchGBPData: BranchGBPPerformance[] = [
     trafficShare: 0.3,
     coreStrengthAndChallenge: 'Elite conversion efficiency (13.53%) in premier CBD, severely constrained by negligible search reach (170 views, -51% MoM).',
     strategicActionPlan: "Optimize Makati CBD localized keywords ('watches Makati', 'Seiko Glorietta'), pin precise Glorietta 4 entrance, and launch executive targeted Google Posts."
+  },
+  {
+    id: 'branch-venice',
+    branchName: 'Venice Grand Canal',
+    region: 'Metro Manila',
+    totalViews: 320,
+    momViewsGrowth: '-18.4%',
+    totalActions: 28,
+    calls: 2,
+    callShare: 7.1,
+    directions: 26,
+    directionShare: 92.9,
+    websiteClicks: 0,
+    conversionRate: 8.75,
+    benchmarkVariance: '+6.75%',
+    averageStarRating: 0.00,
+    positiveReviewPct: 0.0,
+    performanceStatus: 'Above Benchmark',
+    performanceTier: 'Tier 1: Elite Converter',
+    trafficShare: 0.5,
+    coreStrengthAndChallenge: 'Romantic lifestyle mall destination footfall; zero reviews currently logged on GBP profile.',
+    strategicActionPlan: 'Deploy boutique counter QR review standees to build baseline review count and optimize McKinley Hill search terms.'
   }
 ];
 
@@ -1407,6 +1880,20 @@ export const initialBoutiqueListings: LocalBoutiqueListing[] = [
     directoriesCount: 16,
     status: 'Verified & Active',
     openingHours: '10:00 AM – 9:00 PM Daily'
+  },
+  {
+    id: 'boutique-venice',
+    name: 'Seiko Boutique Venice Grand Canal',
+    mall: 'Venice Grand Canal Mall',
+    city: 'Taguig, Metro Manila',
+    address: 'G/F Venice Grand Canal Mall, McKinley Hill, Taguig, 1630 Metro Manila',
+    phone: '+63 2 8816 3399',
+    rating: 0.0,
+    reviewsCount: 0,
+    napConsistency: 92,
+    directoriesCount: 14,
+    status: 'Needs Review',
+    openingHours: '11:00 AM – 10:00 PM Daily'
   }
 ];
 
