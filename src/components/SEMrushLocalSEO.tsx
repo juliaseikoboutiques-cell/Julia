@@ -266,8 +266,8 @@ export const SEMrushLocalSEO: React.FC<SEMrushLocalSEOProps> = ({
             }`}
           >
             <Building className="w-3.5 h-3.5" />
-            <span>Google Business Profile & Reviews</span>
-            <span className="text-[10px] px-1.5 py-0.2 rounded bg-black/30 font-mono">4.9★</span>
+            <span>All-Branch GBP Benchmark (13 Stores)</span>
+            <span className="text-[10px] px-1.5 py-0.2 rounded bg-black/30 font-mono">3.74★ · 751 Actions</span>
           </button>
         )}
 

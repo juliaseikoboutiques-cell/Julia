@@ -114,16 +114,16 @@ export const KPISummaryStrip: React.FC<KPISummaryStripProps> = ({
       {/* 6. Google Business Flagship Actions */}
       <div className="bg-slate-900/80 border border-slate-800 rounded-lg p-3.5 flex flex-col justify-between">
         <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
-          <span className="font-medium">Glorietta 4 Actions</span>
+          <span className="font-medium">13 Boutiques Actions</span>
           <MapPin className="w-3.5 h-3.5 text-rose-400" />
         </div>
         <div className="flex items-baseline gap-2">
           <span className="text-2xl font-bold tracking-tight text-white tabular-nums font-mono">
             {totalLocalActions.toLocaleString()}
           </span>
-          <span className="text-xs text-emerald-400 font-medium tabular-nums font-mono">4.9★</span>
+          <span className="text-xs text-amber-400 font-medium tabular-nums font-mono">{gbpData.overallRating}★</span>
         </div>
-        <div className="text-[11px] text-slate-500 mt-1">Boutique visits & calls</div>
+        <div className="text-[11px] text-slate-500 mt-1">Directions: 70.8% · Calls: 24%</div>
       </div>
     </div>
   );

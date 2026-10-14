@@ -8,6 +8,7 @@ import {
   SEMrushLocalKeyword,
   LocalBoutiqueListing,
 } from '../types/marketing';
+import { initialBranchGBPData } from '../data/initialData';
 
 interface ExportModalProps {
   isOpen: boolean;
@@ -63,6 +64,13 @@ export const ExportModal: React.FC<ExportModalProps> = ({
     semrushKeywords.forEach((s) => {
       csv += `"${s.keyword}","${s.intent}",#${s.rankGooglePH},${s.searchVolume},${s.change},${s.cpcPHP},${s.kd}%,"${s.landingUrl}"\n`;
     });
+
+    csv += "\n--- SEIKO BOUTIQUE NETWORK — ALL-BRANCH GBP PERFORMANCE (SEPTEMBER 2026 ACTUALS) ---\n";
+    csv += "Branch Name,Region,Total Views,MoM Views Growth %,Total Actions,Calls,Directions,Website Clicks,Conversion Rate %,Benchmark Variance,Average Star Rating,Positive Review %,Performance Status,Performance Tier,Traffic Share %,Core Strength & Challenge,Strategic Action Plan\n";
+    initialBranchGBPData.forEach((b) => {
+      csv += `"${b.branchName}","${b.region}",${b.totalViews},"${b.momViewsGrowth}",${b.totalActions},${b.calls},${b.directions},${b.websiteClicks},${b.conversionRate}%,"${b.benchmarkVariance}",${b.averageStarRating},${b.positiveReviewPct}%,"${b.performanceStatus}","${b.performanceTier}",${b.trafficShare}%,"${b.coreStrengthAndChallenge.replace(/"/g, '""')}","${b.strategicActionPlan.replace(/"/g, '""')}"\n`;
+    });
+    csv += `"NETWORK TOTAL / AVG","13 Stores",64502,"+48.8%",751,180,532,39,1.16%,"-0.84%",3.74,61.9%,"Below Benchmark","All Tiers",100%,"Dominant Channel: Directions (70.8%)","Focus on SM North category audit, Megamall review response, and Mitsukoshi VIP catalog integration"\n`;
 
     csv += "\n--- OFFICIAL BOUTIQUE NETWORK (NAP DIRECTORY AUDIT) ---\n";
     csv += "Boutique Name,Location,Phone,Rating,NAP Consistency %,Status\n";

@@ -31,6 +31,7 @@ import {
   LocalBoutiqueListing,
   ConsolidatedPlatformMetric,
 } from '../types/marketing';
+import { initialBranchGBPData } from '../data/initialData';
 
 interface SlidesGeneratorProps {
   campaigns: AdCampaign[];
@@ -255,69 +256,89 @@ Date: ${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', 
       ),
     },
 
-    // SLIDE 3: Boutique Foot Traffic & Google Business Profile
+    // SLIDE 3: Boutique Foot Traffic & Google Business Profile (13 Stores Actuals)
     {
       id: 3,
-      badge: 'LOCAL BOUTIQUE TRAFFIC',
-      title: 'Metro Manila Boutique Foot Traffic & Google Business Insights',
-      subtitle: 'Driving luxury store walk-ins across Glorietta 4, SM Megamall, Mitsukoshi BGC & SM Mall of Asia',
+      badge: 'ALL-BRANCH GBP PERFORMANCE',
+      title: 'Seiko Boutique Network · 13-Branch GBP Benchmark (Sep 2026)',
+      subtitle: 'Official actuals across Metro Manila & Cebu: 64,502 Views · 751 High-Intent Actions · 1.16% Conv.',
       speakerNotes:
-        'Highlight the offline impact: Digital marketing is not just driving e-commerce, it generated ' +
-        gbpData.customerActions.directionRequests.toLocaleString() +
-        ' direction requests and ' +
-        gbpData.customerActions.phoneCalls.toLocaleString() +
-        ' direct calls to store managers.',
+        'Walk through our September actuals across all 13 boutiques: We achieved 64,502 total views and 751 customer actions. Directions dominate customer intent at 70.8% (532 requests). Mitsukoshi BGC is our elite converter at 17.67%, while SM North generates 46% of all network discovery.',
       renderContent: () => (
         <div className="space-y-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800">
-              <span className="text-[11px] uppercase tracking-wider text-slate-400 font-medium">Monthly Maps Views</span>
-              <div className="text-xl md:text-2xl font-bold text-white font-mono mt-1">
-                {gbpData.viewsOnMaps.toLocaleString()}
+            <div className="p-3 rounded-xl bg-slate-900 border border-slate-800">
+              <span className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">Network Views (13 Stores)</span>
+              <div className="text-xl md:text-2xl font-bold text-white font-mono mt-0.5">
+                64,502
               </div>
-              <span className="text-[11px] text-emerald-400">+14.2% MoM</span>
+              <span className="text-[10px] text-emerald-400 font-semibold">+48.8% MoM Growth</span>
             </div>
-            <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800">
-              <span className="text-[11px] uppercase tracking-wider text-slate-400 font-medium">Direction Requests</span>
-              <div className="text-xl md:text-2xl font-bold text-amber-400 font-mono mt-1">
-                {gbpData.customerActions.directionRequests.toLocaleString()}
+            <div className="p-3 rounded-xl bg-slate-900 border border-slate-800">
+              <span className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">Customer Actions</span>
+              <div className="text-xl md:text-2xl font-bold text-amber-400 font-mono mt-0.5">
+                751
               </div>
-              <span className="text-[11px] text-slate-400">High-intent footfall</span>
+              <span className="text-[10px] text-slate-300">Directions: 532 (70.8%)</span>
             </div>
-            <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800">
-              <span className="text-[11px] uppercase tracking-wider text-slate-400 font-medium">Direct Phone Calls</span>
-              <div className="text-xl md:text-2xl font-bold text-indigo-400 font-mono mt-1">
-                {gbpData.customerActions.phoneCalls.toLocaleString()}
+            <div className="p-3 rounded-xl bg-slate-900 border border-slate-800">
+              <span className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">Conversion Rate</span>
+              <div className="text-xl md:text-2xl font-bold text-indigo-400 font-mono mt-0.5">
+                1.16%
               </div>
-              <span className="text-[11px] text-slate-400">Stock inquiries & reservations</span>
+              <span className="text-[10px] text-rose-400">Var: -0.84% vs 2.0% BM</span>
             </div>
-            <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800">
-              <span className="text-[11px] uppercase tracking-wider text-slate-400 font-medium">Boutique Rating</span>
-              <div className="text-xl md:text-2xl font-bold text-emerald-400 font-mono mt-1">
-                {gbpData.overallRating} ★
+            <div className="p-3 rounded-xl bg-slate-900 border border-slate-800">
+              <span className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">Network Reputation</span>
+              <div className="text-xl md:text-2xl font-bold text-emerald-400 font-mono mt-0.5">
+                3.74 ★
               </div>
-              <span className="text-[11px] text-slate-400">Across {gbpData.reviewCount} customer reviews</span>
+              <span className="text-[10px] text-slate-300">61.9% Positive Reviews</span>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {boutiques.slice(0, 4).map((b) => (
-              <div key={b.id} className="p-3.5 rounded-xl bg-slate-900/70 border border-slate-800 flex items-center justify-between">
-                <div>
-                  <div className="text-sm font-semibold text-white flex items-center gap-1.5">
-                    <Store className="w-3.5 h-3.5 text-amber-400" />
-                    {b.name}
-                  </div>
-                  <span className="text-xs text-slate-400">{b.mall} · {b.city}</span>
+            <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1.5">
+              <div className="flex items-center justify-between text-xs font-bold text-emerald-400">
+                <span>Tier 1: Elite Converters (High-Ticket ROI)</span>
+                <span className="text-[10px] bg-emerald-950 px-2 py-0.5 rounded text-emerald-300 border border-emerald-800">Above Benchmark</span>
+              </div>
+              <div className="space-y-1 text-[11px]">
+                <div className="flex items-center justify-between p-1.5 rounded bg-slate-950/70 border border-slate-800/80">
+                  <span className="text-white font-medium">Mitsukoshi BGC</span>
+                  <span className="font-mono text-emerald-400 font-bold">17.67% Conv · 94 actions (18 web clicks)</span>
                 </div>
-                <div className="text-right">
-                  <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-950/80 text-emerald-400 border border-emerald-800/40">
-                    {b.rating} ★ ({b.reviewsCount} reviews)
-                  </span>
-                  <div className="text-[11px] text-slate-400 mt-1">NAP: {b.napConsistency}% Verified</div>
+                <div className="flex items-center justify-between p-1.5 rounded bg-slate-950/70 border border-slate-800/80">
+                  <span className="text-white font-medium">Glorietta Makati Flagship</span>
+                  <span className="font-mono text-emerald-400 font-bold">13.53% Conv · 23 actions (91% directions)</span>
+                </div>
+                <div className="flex items-center justify-between p-1.5 rounded bg-slate-950/70 border border-slate-800/80">
+                  <span className="text-white font-medium">NUSTAR Resort Cebu</span>
+                  <span className="font-mono text-emerald-400 font-bold">11.66% Conv · 47 actions (100% directions)</span>
                 </div>
               </div>
-            ))}
+            </div>
+
+            <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1.5">
+              <div className="flex items-center justify-between text-xs font-bold text-amber-400">
+                <span>Tier 3: Anchor & High-Traffic Footfall Hubs</span>
+                <span className="text-[10px] bg-amber-950 px-2 py-0.5 rounded text-amber-300 border border-amber-800">High Volume</span>
+              </div>
+              <div className="space-y-1 text-[11px]">
+                <div className="flex items-center justify-between p-1.5 rounded bg-slate-950/70 border border-slate-800/80">
+                  <span className="text-white font-medium">SM North EDSA</span>
+                  <span className="font-mono text-slate-300">29,681 views (46% traffic) · 64 actions</span>
+                </div>
+                <div className="flex items-center justify-between p-1.5 rounded bg-slate-950/70 border border-slate-800/80">
+                  <span className="text-white font-medium">SM Megamall</span>
+                  <span className="font-mono text-slate-300">107 actions (52 calls) · 2.9★ drag</span>
+                </div>
+                <div className="flex items-center justify-between p-1.5 rounded bg-slate-950/70 border border-slate-800/80">
+                  <span className="text-white font-medium">Festival Mall Alabang</span>
+                  <span className="font-mono text-slate-300">100 actions · 4.5★ (83% positive)</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       ),

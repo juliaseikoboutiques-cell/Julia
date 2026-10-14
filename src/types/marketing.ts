@@ -211,6 +211,29 @@ export interface LocalBoutiqueListing {
   openingHours: string;
 }
 
+export interface BranchGBPPerformance {
+  id: string;
+  branchName: string;
+  region: 'Metro Manila' | 'Cebu';
+  totalViews: number;
+  momViewsGrowth: string;
+  totalActions: number;
+  calls: number;
+  callShare: number; // %
+  directions: number;
+  directionShare: number; // %
+  websiteClicks: number;
+  conversionRate: number; // %
+  benchmarkVariance: string;
+  averageStarRating: number;
+  positiveReviewPct: number; // %
+  performanceStatus: 'Above Benchmark' | 'Below Benchmark';
+  performanceTier: 'Tier 3: Mega Anchor' | 'Tier 3: High-Traffic' | 'Tier 3: Regional Hub' | 'Tier 2: Near Benchmark' | 'Tier 1: Above Benchmark' | 'Tier 1: High Converter' | 'Tier 1: Elite Converter';
+  trafficShare: number; // %
+  coreStrengthAndChallenge: string;
+  strategicActionPlan: string;
+}
+
 export interface SEMrushLocalOverview {
   authorityScore: number;
   organicTrafficPH: number;
@@ -220,4 +243,5 @@ export interface SEMrushLocalOverview {
   referringDomains: number;
   top3PackShareOfVoice: number;
 }
+
 
